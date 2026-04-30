@@ -1,0 +1,100 @@
+ const cardsContainer = document.getElementById('cardsContainer');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // Filtering logic
+        menuItems.forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelector('.menu-item.active').classList.remove('active');
+                button.classList.add('active');
+                const category = button.dataset.category;
+                const hero = document.querySelector('.hero');
+                const cardsContainer = document.querySelector('.cards');
+                const header = document.querySelector('.header');
+                if (category === 'home') {
+                    hero.style.display = 'grid';
+                    cardsContainer.style.display = 'none';
+                    header.style.display = 'none';
+                } else {
+                    hero.style.display = 'none';
+                    cardsContainer.style.display = 'grid';
+                    header.style.display = 'block';
+                    document.querySelectorAll('.meal-card').forEach(card => {
+                        card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+                        card.classList.remove('selected');
+                        const details = card.querySelector('.card-details');
+                        if (details) details.innerHTML = '';
+                    });
+                }
+            });
+        });
+
+        // Initial state
+        const initialActive = document.querySelector('.menu-item.active');
+        if (initialActive && initialActive.dataset.category === 'home') {
+            document.querySelector('.hero').style.display = 'grid';
+            document.querySelector('.cards').style.display = 'none';
+            document.querySelector('.header').style.display = 'none';
+        }
+
+        // Card selection
+        cardsContainer.addEventListener('click', (event) => {
+            const card = event.target.closest('.meal-card');
+            if (!card) return;
+            document.querySelectorAll('.meal-card.selected').forEach(c => {
+                c.classList.remove('selected');
+                const details = c.querySelector('.card-details');
+                if (details) details.innerHTML = '';
+            });
+            card.classList.add('selected');
+
+            const title = card.querySelector('h2').textContent;
+            const description = card.querySelector('p').textContent;
+            const category = card.dataset.category;
+            const details = card.querySelector('.card-details');
+            const macros = {
+                'Zucchini Meatball Bowl': '420 kcal - Carbs 24g, Protein 30g, Fat 18g',
+                'Grilled Chicken Power Plate': '450 kcal - Carbs 20g, Protein 42g, Fat 24g',
+                'Keto Chicken Bowl': '520 kcal - Carbs 10g, Protein 44g, Fat 32g',
+                'Southwest Chicken Burrito Bowl': '580 kcal - Carbs 62g, Protein 38g, Fat 18g',
+                'Salmon & Veggie Plate': '500 kcal - Carbs 28g, Protein 34g, Fat 24g',
+                'Herb-Roasted Turkey Plate': '520 kcal - Carbs 25g, Protein 42g, Fat 21g'
+            };
+
+            if (details) {
+                details.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                    <ul>
+                        <li>Category: ${category}</li>
+                        <li>${macros[title] || 'Nutrition info not available.'}</li>
+                        <li>Prep time: 15-30 min</li>
+                    </ul>
+                `;
+            }
+        });
+
+        const openLoginBtn = document.getElementById('openLogin');
+        const rightDrawer = document.getElementById('rightDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const closeDrawer = document.getElementById('closeDrawer');
+        const loginForm = document.getElementById('loginForm');
+
+        const drawerOpen = () => {
+            rightDrawer.classList.add('open');
+            drawerBackdrop.classList.add('open');
+        };
+
+        const drawerClose = () => {
+            rightDrawer.classList.remove('open');
+            drawerBackdrop.classList.remove('open');
+        };
+
+        openLoginBtn?.addEventListener('click', drawerOpen);
+        closeDrawer?.addEventListener('click', drawerClose);
+        drawerBackdrop?.addEventListener('click', drawerClose);
+
+        loginForm?.addEventListener('submit', (event) => {
+            event.preventDefault();
+            alert('Login submitted (demo)');
+            drawerClose();
+        });

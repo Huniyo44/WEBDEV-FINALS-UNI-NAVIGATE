@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://jgab-commits.github.io/WEBDEV111Midterm/Freshbite/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freshbite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="indexstyle.css">
+    <script defer src="indexscripit.js.download"></script>
+</head>
+
+
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="freshbite-logo.png" alt="Freshbite Logo" class="brand-icon">
+                <span class="brand-text">UNI <br> NAVIGATE</span>
+            </div>
+            <nav class="menu">                <button class="menu-item active" data-category="home">
+                    <i class="icon fas fa-home"></i>
+                    <span class="label">Home</span>
+                </button>
+
+                <button class="menu-item" data-category="lunch">
+                    <i class="icon fas fa-building"></i>
+                    <span class="label">Building</span>
+                </button>
+                
+               
+                <button class="menu-item active" data-category="snacks">
+                    <i class="icon fas fa-info-circle"></i>
+                    <span class="label">About us</span>
+                </button>
+            </nav>
+            <button id="openLogin" class="drawer-btn">
+                <i class="icon fas fa-sign-in-alt"></i>
+                <span class="label">LOgin</span>
+            </button>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Welcome to OLFU Uni-Navigate</h1>
+            </header>
+            <section class="hero">
+                <img src="olfu_logo.png" alt="olfu-logo" class="olfulogo">
+                <img src="images (3).jpg" alt="OLFU Building Landscape" class="building-photo">
+                <p class="mission">Our mission is to provide quality education and foster innovation in our community.</p>
+            </section>
+            <section class="cards" id="cardsContainer">
+                <article class="meal-card" data-category="lunch" style="display: none;">
+                    <img src="tamm.png" alt="Zucchini Meatball Bowl">
+                    <h2>Saint Benedict Hall</h2>
+                    <p>MXHM+J6G, Tamaraw Hills Ext, Valenzuela, Metro Manila</p>
+                    <div class="badge">VAL CAMP</div>
+                    <div class="card-details"></div>
+                </article>
+                <article class="meal-card" data-category="lunch" style="display: none;">
+                    <img src="main.jpg" alt="Grilled Chicken Power Plate">
+                    <h2>OLFU College of Medicine BLDG.</h2>
+                    <p>125 MacArthur Hwy, Valenzuela, Metro Manila</p>
+                    <div class="badge">VAL CAMP</div>
+                    <div class="card-details"></div>
+                </article>
+                <article class="meal-card" data-category="lunch" style="display: none;">
+                    <img src="Rise.webp" alt="Keto Chicken Bowl">
+                    <h2>RISE Tower</h2>
+                    <p> Fatima Ave, corner MacArthur Hwy, Valenzuela, 1440 Metro Manila
+</p>
+                    <div class="badge">VAL CAMP</div>
+                    <div class="card-details"></div>
+                </article>
+            
+            </section>
+        </main>
+    </div>
+
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <aside class="right-drawer" id="rightDrawer">
+        <div class="drawer-header">
+            <h2>LOgin</h2>
+            <button id="closeDrawer" class="close-btn" aria-label="Close login drawer">✕</button>
+        </div>
+        <p>Sign in to manage your meal plan.</p>
+        <form class="login-form" id="loginForm">
+            <label>
+                Email
+                <input type="email" name="email" required="" placeholder="you@example.com">
+            </label>
+            <label>
+                Password
+                <input type="password" name="password" required="" placeholder="Enter password">
+            </label>
+            <button type="submit" class="primary-btn">Sign In</button>
+        </form>
+    </aside>
+
+</body></html>
