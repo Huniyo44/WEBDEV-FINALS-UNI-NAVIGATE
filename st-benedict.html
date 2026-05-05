@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saint Benedict Hall</title>
+    <link rel="stylesheet" href="indexstyle.css">
+</head>
+<body>
+    <main style="padding: 2rem; max-width: 900px; margin: 0 auto;">
+        <a href="index.html" style="display: inline-block; margin-bottom: 1.5rem; color: #1a4232; text-decoration: none; font-weight: 700;">← Back to Home</a>
+        <section style="background: #fff; border-radius: 16px; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.12); padding: 2rem;">
+            <h1 style="margin-top: 0;">Saint Benedict Hall</h1>
+            <p style="font-size: 1.05rem; color: #4a5a72; max-width: 680px;">Saint Benedict Hall is one of the main residence halls on the OLFU Valenzuela campus, offering easy access to classrooms, student services, and campus facilities.</p>
+            <div style="margin: 1.25rem 0; padding: 1rem 1.1rem; background: #f4fbf7; border-radius: 12px; border: 1px solid #dceddd; color: #234b34;">
+                <strong>Address:</strong>
+                <p style="margin: 0.5rem 0 0;">MXHM+J6G, Tamaraw Hills Ext, Valenzuela, Metro Manila</p>
+            </div>
+            <h2 style="margin: 1.5rem 0 0.75rem;">Select Floor</h2>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                <button class="floor-btn" data-floor="0" style="padding: 0.75rem 1.2rem; border: 2px solid #1a4232; background: #fff; color: #1a4232; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">Ground Floor</button>
+                <button class="floor-btn" data-floor="2" style="padding: 0.75rem 1.2rem; border: 2px solid #1a4232; background: #fff; color: #1a4232; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">2nd Floor</button>
+                <button class="floor-btn" data-floor="3" style="padding: 0.75rem 1.2rem; border: 2px solid #1a4232; background: #fff; color: #1a4232; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">3rd Floor</button>
+                <button class="floor-btn" data-floor="4" style="padding: 0.75rem 1.2rem; border: 2px solid #1a4232; background: #fff; color: #1a4232; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">4th Floor</button>
+                <button class="floor-btn" data-floor="5" style="padding: 0.75rem 1.2rem; border: 2px solid #1a4232; background: #fff; color: #1a4232; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">5th Floor</button>
+            </div>
+            <div id="floorInfo" style="margin: 1.5rem 0; display: none;">
+                <div id="roomsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;"></div>
+            </div>
+            <div id="imageModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
+                <div style="background: #fff; border-radius: 12px; padding: 2rem; max-width: 600px; width: 90%; position: relative;">
+                    <button id="closeModal" style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+                    <h3 id="modalTitle" style="margin-top: 0; color: #1a4232;"></h3>
+                    <div style="position: relative; display: flex; align-items: center; justify-content: center; margin: 1.5rem 0;">
+                        <img id="modalImage" src="" alt="" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+                        <button id="prevImage" style="padding: 0.5rem 1rem; background: #1a4232; color: #fff; border: none; border-radius: 6px; cursor: pointer;">← Previous</button>
+                        <span id="imageCount" style="color: #4a5a72; font-weight: 600;"></span>
+                        <button id="nextImage" style="padding: 0.5rem 1rem; background: #1a4232; color: #fff; border: none; border-radius: 6px; cursor: pointer;">Next →</button>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; color: #4a5a72;"></p>
+        </section>
+    </main>
+    <script>
+        let currentImageIndex = 0;
+        let currentRoomImages = [];
+
+        const floorRooms = {
+            0: [
+                { name: 'Computer Lab 1', images: ['TAMARAW_BUILDING/Ground_Floor/Comlab1_door.jpg'] },
+                { name: 'Computer Lab 2', images: ['TAMARAW_BUILDING/Ground_Floor/Comlab2_door.jpg'] },
+                { name: 'Computer Lab 4', images: ['TAMARAW_BUILDING/Ground_Floor/Comlab4_door.jpg', 'TAMARAW_BUILDING/Ground_Floor/Comlab4_inner1.jpg'] },
+                { name: 'Food Canteen', images: ['TAMARAW_BUILDING/Ground_Floor/Food_caten.jpg'] },
+                { name: 'Mac Laboratory', images: ['TAMARAW_BUILDING/Ground_Floor/Maclab_door.jpg'] },
+                { name: 'PT Simulation Room', images: ['TAMARAW_BUILDING/Ground_Floor/PT_simulation1_room_door.jpg', 'TAMARAW_BUILDING/Ground_Floor/PT_Simulation_room2_door.jpg'] }
+            ],
+            2: [
+                { name: 'Computer Lab 3', images: ['TAMARAW_BUILDING/2ND_FLOOR/Comlab3_door.jpg', 'TAMARAW_BUILDING/2ND_FLOOR/Comlab3_inner1.jpg', 'TAMARAW_BUILDING/2ND_FLOOR/Comlab3_inner2.jpg', 'TAMARAW_BUILDING/2ND_FLOOR/Comlab3_inner3.jpg'] }
+            ],
+            3: [],
+            4: [],
+            5: [
+                { name: 'Room 501', images: ['TAMARAW_BUILDING/5TH_FLOOR/501_door.jpg', 'TAMARAW_BUILDING/5TH_FLOOR/501_inner.jpg', 'TAMARAW_BUILDING/5TH_FLOOR/501_inner2.jpg', 'TAMARAW_BUILDING/5TH_FLOOR/Tam_501_door.jpg'] },
+                { name: 'Room 502', images: ['TAMARAW_BUILDING/5TH_FLOOR/502_door.jpg', 'TAMARAW_BUILDING/5TH_FLOOR/502_inner.jpg'] },
+                { name: 'Room 503', images: ['TAMARAW_BUILDING/5TH_FLOOR/503_inner.jpg', 'TAMARAW_BUILDING/5TH_FLOOR/503_MusicRoom.jpg'] },
+                { name: 'Room 504', images: ['TAMARAW_BUILDING/5TH_FLOOR/504_inner.jpg'] },
+                { name: '5th Floor Hallway', images: ['TAMARAW_BUILDING/5TH_FLOOR/Tam_5th_hallway.jpg'] }
+            ]
+        };
+
+        const floorButtons = document.querySelectorAll('.floor-btn');
+        const floorInfoDiv = document.getElementById('floorInfo');
+        const roomsContainer = document.getElementById('roomsContainer');
+        const imageModal = document.getElementById('imageModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalImage = document.getElementById('modalImage');
+        const imageCount = document.getElementById('imageCount');
+        const closeModal = document.getElementById('closeModal');
+        const prevImage = document.getElementById('prevImage');
+        const nextImage = document.getElementById('nextImage');
+
+        const openModal = (roomName, images) => {
+            currentRoomImages = images;
+            currentImageIndex = 0;
+            modalTitle.textContent = roomName;
+            updateModalImage();
+            imageModal.style.display = 'flex';
+        };
+
+        const updateModalImage = () => {
+            if (currentRoomImages.length === 0) return;
+            modalImage.src = currentRoomImages[currentImageIndex];
+            imageCount.textContent = `${currentImageIndex + 1} / ${currentRoomImages.length}`;
+        };
+
+        const closeImageModal = () => {
+            imageModal.style.display = 'none';
+        };
+
+        closeModal.addEventListener('click', closeImageModal);
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === imageModal) closeImageModal();
+        });
+
+        prevImage.addEventListener('click', () => {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateModalImage();
+            }
+        });
+
+        nextImage.addEventListener('click', () => {
+            if (currentImageIndex < currentRoomImages.length - 1) {
+                currentImageIndex++;
+                updateModalImage();
+            }
+        });
+
+        floorButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                floorButtons.forEach(b => {
+                    b.style.background = '#fff';
+                    b.style.color = '#1a4232';
+                });
+                btn.style.background = '#1a4232';
+                btn.style.color = '#fff';
+
+                const floor = btn.dataset.floor;
+                const rooms = floorRooms[floor];
+                
+                roomsContainer.innerHTML = '';
+                rooms.forEach(room => {
+                    const card = document.createElement('div');
+                    card.style.cssText = 'background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(15, 25, 42, 0.1); cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; border: 2px solid transparent;';
+                    card.innerHTML = `<img src="${room.images[0]}" alt="${room.name}" style="width: 100%; height: 120px; object-fit: cover;"><div style="padding: 1rem;"><strong style="color: #1a4232; font-size: 1.05rem;">${room.name}</strong><p style="margin: 0.5rem 0 0; color: #4a5a72; font-size: 0.95rem;">${room.images.length} photo${room.images.length !== 1 ? 's' : ''}</p></div>`;
+                    
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-4px)';
+                        card.style.boxShadow = '0 8px 20px rgba(15, 25, 42, 0.15)';
+                        card.style.borderColor = '#4caf50';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = '0 4px 12px rgba(15, 25, 42, 0.1)';
+                        card.style.borderColor = 'transparent';
+                    });
+                    
+                    card.addEventListener('click', () => {
+                        openModal(room.name, room.images);
+                    });
+                    
+                    roomsContainer.appendChild(card);
+                });
+                
+                floorInfoDiv.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

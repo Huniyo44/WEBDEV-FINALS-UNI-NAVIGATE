@@ -10,19 +10,23 @@
                 const hero = document.querySelector('.hero');
                 const cardsContainer = document.querySelector('.cards');
                 const header = document.querySelector('.header');
+                const role = getUserRole();
                 if (category === 'home') {
                     hero.style.display = 'grid';
                     cardsContainer.style.display = 'none';
                     header.style.display = 'none';
+                    if (role && userPanel) {
+                        userPanel.classList.remove('hidden');
+                    }
                 } else {
                     hero.style.display = 'none';
                     cardsContainer.style.display = 'grid';
                     header.style.display = 'block';
+                    if (userPanel) {
+                        userPanel.classList.add('hidden');
+                    }
                     document.querySelectorAll('.meal-card').forEach(card => {
                         card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
-                        card.classList.remove('selected');
-                        const details = card.querySelector('.card-details');
-                        if (details) details.innerHTML = '';
                     });
                 }
             });
@@ -36,48 +40,92 @@
             document.querySelector('.header').style.display = 'none';
         }
 
-        // Card selection
-        cardsContainer.addEventListener('click', (event) => {
-            const card = event.target.closest('.meal-card');
-            if (!card) return;
-            document.querySelectorAll('.meal-card.selected').forEach(c => {
-                c.classList.remove('selected');
-                const details = c.querySelector('.card-details');
-                if (details) details.innerHTML = '';
-            });
-            card.classList.add('selected');
-
-            const title = card.querySelector('h2').textContent;
-            const description = card.querySelector('p').textContent;
-            const category = card.dataset.category;
-            const details = card.querySelector('.card-details');
-            const macros = {
-                'Zucchini Meatball Bowl': '420 kcal - Carbs 24g, Protein 30g, Fat 18g',
-                'Grilled Chicken Power Plate': '450 kcal - Carbs 20g, Protein 42g, Fat 24g',
-                'Keto Chicken Bowl': '520 kcal - Carbs 10g, Protein 44g, Fat 32g',
-                'Southwest Chicken Burrito Bowl': '580 kcal - Carbs 62g, Protein 38g, Fat 18g',
-                'Salmon & Veggie Plate': '500 kcal - Carbs 28g, Protein 34g, Fat 24g',
-                'Herb-Roasted Turkey Plate': '520 kcal - Carbs 25g, Protein 42g, Fat 21g'
-            };
-
-            if (details) {
-                details.innerHTML = `
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                    <ul>
-                        <li>Category: ${category}</li>
-                        <li>${macros[title] || 'Nutrition info not available.'}</li>
-                        <li>Prep time: 15-30 min</li>
-                    </ul>
-                `;
-            }
-        });
-
         const openLoginBtn = document.getElementById('openLogin');
+        const accountBtn = document.getElementById('accountBtn');
         const rightDrawer = document.getElementById('rightDrawer');
         const drawerBackdrop = document.getElementById('drawerBackdrop');
         const closeDrawer = document.getElementById('closeDrawer');
         const loginForm = document.getElementById('loginForm');
+        const userPanel = document.getElementById('userPanel');
+        const roleNameEl = document.getElementById('roleName');
+        const userNameEl = document.getElementById('userName');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const roleActions = document.getElementById('roleActions');
+
+        const rolePermissions = {
+            'Super Admin': [
+                { title: 'Manage Users', desc: 'Create or edit admin and user accounts.', action: 'manageUsers' },
+                { title: 'Site Settings', desc: 'Configure site and navigation settings.', action: 'siteSettings' }
+            ],
+            'Admin': [
+                { title: 'Edit Buildings', desc: 'Update building information and map links.', action: 'editBuildings' },
+                { title: 'Review Content', desc: 'Approve new page details and descriptions.', action: 'reviewContent' }
+            ],
+            'User': [
+                { title: 'Explore Buildings', desc: 'Open building pages and view campus locations.', action: 'exploreBuildings' },
+                { title: 'Open Map Links', desc: 'Use map links for quick navigation.', action: 'openMaps' }
+            ]
+        };
+
+        const setUserRole = (role) => {
+            sessionStorage.setItem('olfuRole', role);
+        };
+
+        const clearUserRole = () => {
+            sessionStorage.removeItem('olfuRole');
+        };
+
+        const getUserRole = () => {
+            return sessionStorage.getItem('olfuRole');
+        };
+
+        const buildRoleActions = (role) => {
+            if (!roleActions) return;
+            roleActions.innerHTML = '';
+            const permissions = rolePermissions[role] || [];
+            permissions.forEach((permission) => {
+                const card = document.createElement('div');
+                card.className = 'permission-card';
+                card.innerHTML = `
+                    <h3>${permission.title}</h3>
+                    <p>${permission.desc}</p>
+                    <button type="button" data-action="${permission.action}">${permission.title}</button>
+                `;
+                roleActions.appendChild(card);
+            });
+        };
+
+        const updateRolePanel = () => {
+            const role = getUserRole();
+            if (!userPanel) return;
+            if (!role) {
+                userPanel.classList.add('hidden');
+                updateSidebarButtons();
+                return;
+            }
+            userPanel.classList.remove('hidden');
+            roleNameEl.textContent = role;
+            userNameEl.textContent = role === 'User' ? 'Campus Visitor' : role;
+            buildRoleActions(role);
+            updateSidebarButtons();
+        };
+
+        const updateSidebarButtons = () => {
+            const role = getUserRole();
+
+            if (!openLoginBtn) return;
+
+            if (role) {
+                openLoginBtn.innerHTML = '<i class="icon fas fa-sign-out-alt"></i><span class="label">Logout</span>';
+                openLoginBtn.title = 'Logout';
+            } else {
+                openLoginBtn.innerHTML = '<i class="icon fas fa-sign-in-alt"></i><span class="label">Login</span>';
+                openLoginBtn.title = 'Login';
+            }
+        };
+
+        updateSidebarButtons();
+        updateRolePanel();
 
         const drawerOpen = () => {
             rightDrawer.classList.add('open');
@@ -89,12 +137,45 @@
             drawerBackdrop.classList.remove('open');
         };
 
-        openLoginBtn?.addEventListener('click', drawerOpen);
+        openLoginBtn?.addEventListener('click', () => {
+            if (getUserRole()) {
+                clearUserRole();
+                window.location.href = 'index.html';
+                return;
+            }
+            drawerOpen();
+        });
+
+        accountBtn?.addEventListener('click', () => {
+            if (getUserRole()) {
+                userPanel?.classList.toggle('hidden');
+            } else {
+                drawerOpen();
+            }
+        });
+
         closeDrawer?.addEventListener('click', drawerClose);
         drawerBackdrop?.addEventListener('click', drawerClose);
 
+        const users = [
+            { email: 'super@olfu.edu', password: 'super123', role: 'Super Admin', page: 'dashboard-super-admin.html' },
+            { email: 'admin@olfu.edu', password: 'admin123', role: 'Admin', page: 'dashboard-admin.html' },
+            { email: 'user@olfu.edu', password: 'user123', role: 'User', page: 'dashboard-user.html' }
+        ];
+
         loginForm?.addEventListener('submit', (event) => {
             event.preventDefault();
-            alert('Login submitted (demo)');
+            const email = loginForm.email.value.trim().toLowerCase();
+            const password = loginForm.password.value.trim();
+            const user = users.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                alert('Invalid login. Please use one of the demo accounts shown in the drawer.');
+                return;
+            }
+
+            setUserRole(user.role);
+            alert(`Welcome ${user.role}! Redirecting to the home page...`);
             drawerClose();
+            window.location.href = 'index.html';
         });
