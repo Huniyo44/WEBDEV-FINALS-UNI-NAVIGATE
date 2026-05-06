@@ -22,6 +22,111 @@
                 <li>Support user requests and route them to correct pages.</li>
             </ul>
         </section>
+
+        <!-- Statistics Section -->
+        <section style="margin-top: 2rem; background: #fff; border-radius: 16px; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.12); padding: 2rem;">
+            <h2 style="margin-top: 0; color: #1a4232;">Website Statistics</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- Total Visits Card -->
+                <div style="background: linear-gradient(135deg, #1a4232 0%, #2d5f47 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(26, 66, 50, 0.15);">
+                    <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Total Visits</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;" id="totalVisits">24,582</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;">Since platform launch</div>
+                </div>
+
+                <!-- Most Registered Course Card -->
+                <div style="background: linear-gradient(135deg, #0056b3 0%, #0073e6 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 86, 179, 0.15);">
+                    <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Most Registrations</div>
+                    <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="topCourseReg">BS Nursing</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;" id="topCourseRegCount">2,340 registrations</div>
+                </div>
+
+                <!-- Top Course Users Card -->
+                <div style="background: linear-gradient(135deg, #d2691e 0%, #ff8c00 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(210, 105, 30, 0.15);">
+                    <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Top Active Course</div>
+                    <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="topActiveCoarse">BS IT</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8;" id="topActiveCourseCount">3,182 monthly visits</div>
+                </div>
+            </div>
+
+            <!-- Detailed Statistics Table -->
+            <h3 style="color: #1a4232; margin-top: 2rem;">Course Registration Breakdown</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background: #f4fbf7; border-bottom: 2px solid #dceddd;">
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Course</th>
+                            <th style="padding: 1rem; text-align: center; color: #1a4232; font-weight: 700;">Registrations</th>
+                            <th style="padding: 1rem; text-align: center; color: #1a4232; font-weight: 700;">Monthly Visits</th>
+                            <th style="padding: 1rem; text-align: center; color: #1a4232; font-weight: 700;">Growth</th>
+                        </tr>
+                    </thead>
+                    <tbody id="statsTableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
-</body>
+
+    <script>
+        // Sample statistics data
+        const courseStats = [
+            { course: 'BS Nursing', registrations: 2340, monthlyVisits: 2850, growth: '+12.5%' },
+            { course: 'BS IT', registrations: 1890, monthlyVisits: 3182, growth: '+18.3%' },
+            { course: 'BS Computer Science', registrations: 1745, monthlyVisits: 2965, growth: '+14.2%' },
+            { course: 'BS Business Administration', registrations: 1620, monthlyVisits: 2340, growth: '+8.7%' },
+            { course: 'BS Physical Therapy', registrations: 1385, monthlyVisits: 1950, growth: '+11.9%' },
+            { course: 'BS Psychology', registrations: 1210, monthlyVisits: 1875, growth: '+9.3%' },
+            { course: 'BS Accountancy', registrations: 1095, monthlyVisits: 1620, growth: '+6.4%' },
+            { course: 'BS Marine Transportation', registrations: 945, monthlyVisits: 1420, growth: '+15.2%' },
+            { course: 'BS International Hospitality', registrations: 872, monthlyVisits: 1305, growth: '+7.8%' },
+            { course: 'Doctor of Medicine', registrations: 720, monthlyVisits: 1095, growth: '+22.1%' }
+        ];
+
+        function renderStatistics() {
+            const tableBody = document.getElementById('statsTableBody');
+            
+            // Calculate totals
+            const totalRegistrations = courseStats.reduce((sum, stat) => sum + stat.registrations, 0);
+            const totalVisits = courseStats.reduce((sum, stat) => sum + stat.monthlyVisits, 0);
+            
+            // Find top by registrations and visits
+            const topByReg = courseStats.reduce((max, stat) => stat.registrations > max.registrations ? stat : max);
+            const topByVisits = courseStats.reduce((max, stat) => stat.monthlyVisits > max.monthlyVisits ? stat : max);
+            
+            // Update summary cards
+            document.getElementById('totalVisits').textContent = totalVisits.toLocaleString();
+            document.getElementById('topCourseReg').textContent = topByReg.course;
+            document.getElementById('topCourseRegCount').textContent = topByReg.registrations.toLocaleString() + ' registrations';
+            document.getElementById('topActiveCoarse').textContent = topByVisits.course;
+            document.getElementById('topActiveCourseCount').textContent = topByVisits.monthlyVisits.toLocaleString() + ' monthly visits';
+            
+            // Populate table
+            tableBody.innerHTML = '';
+            courseStats.forEach(stat => {
+                const row = document.createElement('tr');
+                row.style.borderBottom = '1px solid #dceddd';
+                row.style.transition = 'background-color 0.2s';
+                row.onmouseover = () => row.style.backgroundColor = '#f9fdfb';
+                row.onmouseout = () => row.style.backgroundColor = '';
+                
+                const growthColor = parseFloat(stat.growth) > 10 ? '#2e7d32' : '#ff9800';
+                
+                row.innerHTML = `
+                    <td style="padding: 1rem; color: #1a4232; font-weight: 600;">${stat.course}</td>
+                    <td style="padding: 1rem; text-align: center; color: #4a5a72;">${stat.registrations.toLocaleString()}</td>
+                    <td style="padding: 1rem; text-align: center; color: #4a5a72;">${stat.monthlyVisits.toLocaleString()}</td>
+                    <td style="padding: 1rem; text-align: center; color: ${growthColor}; font-weight: 600;">${stat.growth}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Initial render
+        renderStatistics();
+    </script>
+
+    </body>
 </html>

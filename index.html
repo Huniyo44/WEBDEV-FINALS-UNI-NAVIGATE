@@ -34,11 +34,11 @@
                     </button>
                 </nav>
                 <div class="sidebar-actions">
-                    <button id="accountBtn" class="drawer-btn">
+                    <button id="accountBtn" type="button" class="drawer-btn">
                         <i class="icon fas fa-user"></i>
                         <span class="label">Your Account</span>
                     </button>
-                    <button id="openLogin" class="drawer-btn">
+                    <button id="openLogin" type="button" class="drawer-btn">
                         <i class="icon fas fa-sign-in-alt"></i>
                         <span class="label">Login</span>
                     </button>
@@ -61,11 +61,181 @@
                     </div>
                     <div id="roleActions" class="permission-cards"></div>
                 </section>
-                <section class="hero" data-category="home">
+                <section class="hero" data-category="home" id="homeHeroSection">
                     <div class="hero-content">
                         <img src="freshbite-logo.png" alt="UNI-NAVIGATE Logo" class="hero-logo">
                         <h2>About Uni-Navigate</h2>
                         <p>Uni-Navigate is a comprehensive wayfinding platform designed specifically for OLFU students. We understand that navigating a large university campus can be challenging, especially when you're trying to find your classrooms, discover the perfect spot to hangout, or locate a quiet area during breaks. Our mission is to make your campus experience smoother by providing clear directions, building layouts, and detailed information about all campus facilities. Whether you're a freshman or a returning student, Uni-Navigate is here to help you explore and master your campus with confidence.</p>
+                    </div>
+                </section>
+
+                <!-- Admin Dashboard Section (Only for Admins) -->
+                <section data-category="home" id="adminDashboardSection" style="display: none; padding: 2rem; max-width: 1200px; margin: 0 auto;">
+                    <h2 style="color: #1a4232; margin-top: 0;">Admin Dashboard</h2>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <!-- Total Visits Card -->
+                        <div style="background: linear-gradient(135deg, #1a4232 0%, #2d5f47 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(26, 66, 50, 0.15);">
+                            <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Total Visits</div>
+                            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;" id="dashboardTotalVisits">24,582</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;">Since platform launch</div>
+                        </div>
+
+                        <!-- Most Registered Course Card -->
+                        <div style="background: linear-gradient(135deg, #0056b3 0%, #0073e6 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 86, 179, 0.15);">
+                            <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Most Registrations</div>
+                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="dashboardTopCourseReg">BS Nursing</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;" id="dashboardTopCourseRegCount">2,340 registrations</div>
+                        </div>
+
+                        <!-- Top Course Users Card -->
+                        <div style="background: linear-gradient(135deg, #d2691e 0%, #ff8c00 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(210, 105, 30, 0.15);">
+                            <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Top Active Course</div>
+                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="dashboardTopActiveCourse">BS IT</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;" id="dashboardTopActiveCourseCount">3,182 monthly visits</div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Statistics Table -->
+                    <h3 style="color: #1a4232; margin-top: 2rem;">Course Registration Breakdown</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="background: #f4fbf7; border-bottom: 2px solid #dceddd;">
+                                    <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Course</th>
+                                    <th style="padding: 1rem; text-align: center; color: #1a4232; font-weight: 700;">Registrations</th>
+                                    <th style="padding: 1rem; text-align: center; color: #1a4232; font-weight: 700;">Monthly Visits</th>
+                                    <th style="padding: 1rem; text-align: center; color: #1a4232; font-weight: 700;">Growth</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboardStatsTableBody">
+                                <!-- Populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Super Admin Home Section -->
+                <section data-category="home" id="superAdminDashboardSection" style="display: none; padding: 2rem; max-width: 1200px; margin: 0 auto;">
+                    <h2 style="color: #1a4232; margin-top: 0;">Super Admin Home</h2>
+                    <p style="color: #4a5a72;">Welcome back, Super Admin. Review site activity, feedback, and manage website content from one place.</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div style="background: linear-gradient(135deg, #1a4232 0%, #2d5f47 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(26, 66, 50, 0.15);">
+                            <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Total Visits</div>
+                            <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;" id="superTotalVisits">24,582</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;">Since platform launch</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #0056b3 0%, #0073e6 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 86, 179, 0.15);">
+                            <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Most Registrations</div>
+                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="superTopCourseReg">BS Nursing</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;" id="superTopCourseRegCount">2,340 registrations</div>
+                        </div>
+                        <div style="background: linear-gradient(135deg, #d2691e 0%, #ff8c00 100%); color: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(210, 105, 30, 0.15);">
+                            <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;">Top Active Course</div>
+                            <div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;" id="superTopActiveCourse">BS IT</div>
+                            <div style="font-size: 0.75rem; opacity: 0.8;" id="superTopActiveCourseCount">3,182 monthly visits</div>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; gap: 2rem;">
+                        <section style="background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.08);">
+                            <h3 style="margin-top: 0; color: #1a4232;">System Logs</h3>
+                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                                <input type="text" id="superLogFilter" placeholder="Filter logs..." style="flex: 1; min-width: 200px; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                                <select id="superLogTypeFilter" style="padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                                    <option value="">All Types</option>
+                                    <option value="LOGIN">Login</option>
+                                    <option value="ACCESS">Access</option>
+                                    <option value="ERROR">Error</option>
+                                    <option value="UPDATE">Update</option>
+                                    <option value="DELETE">Delete</option>
+                                </select>
+                                <button onclick="clearSuperLogs()" style="padding: 0.75rem 1.25rem; background: #d32f2f; color: white; border: none; border-radius: 10px; cursor: pointer;">Clear Logs</button>
+                            </div>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                                    <thead>
+                                        <tr style="background: #f4fbf7; border-bottom: 2px solid #dceddd;">
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Timestamp</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Type</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">User</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Action</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="superLogsTableBody"></tbody>
+                                </table>
+                            </div>
+                            <div id="superNoLogsMessage" style="text-align: center; padding: 1.5rem; color: #4a5a72; display: none;">No logs available.</div>
+                        </section>
+
+                        <section style="background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.08);">
+                            <h3 style="margin-top: 0; color: #1a4232;">Feedback Viewer</h3>
+                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+                                <input type="text" id="superFeedbackFilter" placeholder="Search feedback..." style="flex: 1; min-width: 200px; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                                <select id="superFeedbackStatusFilter" style="padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                                    <option value="">All Status</option>
+                                    <option value="Open">Open</option>
+                                    <option value="Resolved">Resolved</option>
+                                    <option value="Important">Important</option>
+                                </select>
+                            </div>
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                                    <thead>
+                                        <tr style="background: #f4fbf7; border-bottom: 2px solid #dceddd;">
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Date</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">User</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Feedback</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Status</th>
+                                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="superFeedbackTableBody"></tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section style="background: #fff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.08);">
+                            <h3 style="margin-top: 0; color: #1a4232;">Website Management</h3>
+                            <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                                Content Type
+                                <select id="superContentType" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                                    <option value="Announcement">Announcement</option>
+                                    <option value="Course">Course</option>
+                                    <option value="Building">Building</option>
+                                    <option value="Page">Page</option>
+                                    <option value="Navigation">Navigation Link</option>
+                                </select>
+                            </label>
+                            <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                                Title / Label
+                                <input id="superContentTitle" type="text" placeholder="Enter title" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                            </label>
+                            <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                                Details
+                                <textarea id="superContentDetails" rows="4" placeholder="Enter details" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;"></textarea>
+                            </label>
+                            <button onclick="addSuperContent()" style="width: 100%; padding: 0.85rem; background: #1a4232; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-bottom: 1rem;">Add Content</button>
+                            <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                                Edit Existing Item
+                                <select id="superEditContentSelect" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px; margin-bottom: 0.8rem;"></select>
+                            </label>
+                            <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                                New Title
+                                <input id="superEditContentTitle" type="text" placeholder="Update title" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;">
+                            </label>
+                            <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                                New Details
+                                <textarea id="superEditContentDetails" rows="3" placeholder="Update details" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 10px;"></textarea>
+                            </label>
+                            <button onclick="editSuperContent()" style="width: 100%; padding: 0.85rem; background: #1a4232; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Save Changes</button>
+                            <div style="margin-top: 1rem; background: #eef7f2; padding: 1rem; border-radius: 12px; border: 1px solid #dceddd; color: #4a5a72;">
+                                <h4 style="margin: 0 0 0.75rem 0; color: #1a4232;">Recent Management Actions</h4>
+                                <ul id="superManagementActionList" style="margin: 0; padding-left: 1.25rem;"></ul>
+                            </div>
+                        </section>
                     </div>
                 </section>
 
@@ -127,10 +297,12 @@
 
                 <footer class="footer">
                     <div class="footer-content">
-                        <h3>Contact Us</h3>
-                        <p><strong>Email:</strong> uni.navigate@olfu.edu</p>
-                        <p><strong>Phone:</strong> (02) 1234 5678</p>
-                        <p><strong>Location:</strong> Our Lady of Fatima University, Valenzuela, Metro Manila</p>
+                        <div id="footerContact">
+                            <h3>Contact Us</h3>
+                            <p><strong>Email:</strong> uni.navigate@olfu.edu</p>
+                            <p><strong>Phone:</strong> (02) 1234 5678</p>
+                            <p><strong>Location:</strong> Our Lady of Fatima University, Valenzuela, Metro Manila</p>
+                        </div>
                         <p class="footer-credit">&copy; 2026 Uni-Navigate. Created by Lhance Suico & Jun Labao</p>
                     </div>
                 </footer>
@@ -140,26 +312,823 @@
         <div class="drawer-backdrop" id="drawerBackdrop"></div>
         <aside class="right-drawer" id="rightDrawer">
             <div class="drawer-header">
-                <h2>Login</h2>
+                <h2 id="drawerTitle">Login</h2>
                 <button id="closeDrawer" class="close-btn" aria-label="Close login drawer">✕</button>
             </div>
-            <p>Sign in to manage your meal plan.</p>
-            <p class="login-info">Demo accounts:
-                <br>Super Admin: super@olfu.edu / super123
-                <br>Admin: admin@olfu.edu / admin123
-                <br>User: user@olfu.edu / user123
-            </p>
-            <form class="login-form" id="loginForm">
-                <label>
-                    Email
-                    <input type="email" name="email" required="" placeholder="you@example.com">
-                </label>
-                <label>
-                    Password
-                    <input type="password" name="password" required="" placeholder="Enter password">
-                </label>
-                <button type="submit" class="primary-btn">Sign In</button>      
-            </form>
+            
+            <!-- Tab Navigation -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e0e0e0;">
+                <button id="loginTab" class="auth-tab active" style="flex: 1; padding: 0.75rem; background: none; border: none; border-bottom: 3px solid #1a4232; cursor: pointer; font-weight: 600; color: #1a4232;">Login</button>
+                <button id="registerTab" class="auth-tab" style="flex: 1; padding: 0.75rem; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 600; color: #999; transition: all 0.3s;">Register</button>
+            </div>
+
+            <!-- Login Section -->
+            <div id="loginSection">
+                <p>Sign in to manage your campus profile.</p>
+                <p class="login-info">Demo accounts:
+                    <br>Super Admin: super@olfu.edu / super123
+                    <br>Admin: admin@olfu.edu / admin123
+                    <br>User: user@olfu.edu / user123
+                </p>
+                <form class="login-form" id="loginForm">
+                    <label>
+                        Email
+                        <input type="email" name="email" required="" placeholder="you@example.com">
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" name="password" required="" placeholder="Enter password">
+                    </label>
+                    <button type="submit" class="primary-btn">Sign In</button>      
+                </form>
+            </div>
+
+            <!-- Registration Section -->
+            <div id="registerSection" style="display: none;">
+                <p>Create a new account and select your course.</p>
+                <form class="login-form" id="registerForm">
+                    <label>
+                        Full Name
+                        <input type="text" name="fullname" required="" placeholder="Your full name">
+                    </label>
+                    <label>
+                        Email
+                        <input type="email" name="email" required="" placeholder="you@example.com">
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" name="password" required="" placeholder="Enter password">
+                    </label>
+                    <label>
+                        Confirm Password
+                        <input type="password" name="confirmPassword" required="" placeholder="Confirm password">
+                    </label>
+                    <label>
+                        College Course
+                        <select name="course" required="" id="courseSelect">
+                            <option value="">-- Select Your Course --</option>
+                            <optgroup label="Medical / Health">
+                                <option value="BSNS">BS Nursing</option>
+                                <option value="BSMLS">BS Medical Laboratory Science (MedTech)</option>
+                                <option value="BSPHARM">BS Pharmacy</option>
+                                <option value="BSPT">BS Physical Therapy</option>
+                                <option value="BSRT">BS Respiratory Therapy</option>
+                                <option value="BSRADTECH">BS Radiologic Technology</option>
+                                <option value="BSND">BS Nutrition and Dietetics</option>
+                            </optgroup>
+                            <optgroup label="Science &amp; Allied">
+                                <option value="BSBIO">BS Biology</option>
+                                <option value="BSPSY">BS Psychology</option>
+                            </optgroup>
+                            <optgroup label="Tech / IT">
+                                <option value="BSCS">BS Computer Science</option>
+                                <option value="BSIT">BS Information Technology</option>
+                                <option value="BSEEMC">BS Entertainment & Multimedia Computing (Animation)</option>
+                            </optgroup>
+                            <optgroup label="Business &amp; Management">
+                                <option value="BSACC">BS Accountancy</option>
+                                <option value="BSAIS">BS Accounting Information System</option>
+                                <option value="BSBA">BS Business Administration</option>
+                                <option value="BSBA-MKT">Marketing Management</option>
+                                <option value="BSBA-OPS">Operations &amp; Supply Chain</option>
+                                <option value="BSBA-BNF">Banking &amp; Finance</option>
+                            </optgroup>
+                            <optgroup label="Hospitality &amp; Tourism">
+                                <option value="BSIHM">BS International Hospitality Management</option>
+                                <option value="CA">Culinary Arts</option>
+                                <option value="CLO">Cruise Line / Hotel Operations</option>
+                                <option value="BSITM">BS International Tourism Management</option>
+                            </optgroup>
+                            <optgroup label="Public Safety / Law-related">
+                                <option value="BSCRIM">BS Criminology</option>
+                                <option value="BSFS">Bachelor of Forensic Science</option>
+                            </optgroup>
+                            <optgroup label="Maritime Courses">
+                                <option value="BSMT">BS Marine Transportation</option>
+                                <option value="BSME-MAR">BS Marine Engineering</option>
+                            </optgroup>
+                            <optgroup label="Education">
+                                <option value="BEED">Bachelor of Elementary Education</option>
+                                <option value="BSED-ENG">Bachelor of Secondary Education (English)</option>
+                            </optgroup>
+                            <optgroup label="Professional Courses">
+                                <option value="MD">Doctor of Medicine</option>
+                                <option value="DMD">Doctor of Dental Medicine</option>
+                            </optgroup>
+                            <optgroup label="Senior High School (SHS)">
+                                <option value="SHS-ABM">ABM (Accountancy, Business &amp; Management)</option>
+                                <option value="SHS-STEM">STEM (Science, Technology, Engineering &amp; Mathematics)</option>
+                                <option value="SHS-HUMSS">HUMSS (Humanities &amp; Social Sciences)</option>
+                                <option value="SHS-GAS">GAS (General Academic Strand)</option>
+                            </optgroup>
+                            <optgroup label="Short Courses / TESDA / Certificates">
+                                <option value="CARE">Caregiving</option>
+                                <option value="CPNC2">Computer Programming NC II</option>
+                                <option value="CHSNC2">Computer Hardware Servicing NC II</option>
+                                <option value="HRS">Hotel &amp; Restaurant Services</option>
+                                <option value="ACS">Associate in Computer Science</option>
+                            </optgroup>
+                            <optgroup label="Graduate (Masters &amp; Doctorate)">
+                                <option value="MBA">MBA / MPA</option>
+                                <option value="MA-MS">MA / MS (Education, Nursing, IT, etc.)</option>
+                                <option value="PHD">PhD &amp; Doctorate programs</option>
+                            </optgroup>
+                        </select>
+                    </label>
+                    <button type="submit" class="primary-btn">Create Account</button>      
+                </form>
+            </div>
         </aside>
 
-    </body></html>
+        <!-- Account Management Drawer -->
+        <aside class="right-drawer" id="accountDrawer">
+            <div class="drawer-header">
+                <h2 id="accountDrawerTitle">My Account</h2>
+                <button id="closeAccountDrawer" class="close-btn" aria-label="Close account drawer">✕</button>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #e0e0e0;">
+                <button id="profileTab" class="auth-tab active" style="flex: 1; padding: 0.75rem; background: none; border: none; border-bottom: 3px solid #1a4232; cursor: pointer; font-weight: 600; color: #1a4232;">Edit Profile</button>
+                <button id="adminTasksTab" class="auth-tab" style="flex: 1; padding: 0.75rem; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-weight: 600; color: #999; transition: all 0.3s; display: none;">Admin Tasks</button>
+            </div>
+
+            <!-- Edit Profile Section -->
+            <div id="profileSection">
+                <form class="login-form" id="editProfileForm">
+                    <label>
+                        Full Name
+                        <input type="text" name="fullname" placeholder="Your full name" id="profileFullName">
+                    </label>
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="your@example.com" id="profileEmail" readonly>
+                    </label>
+                    <label>
+                        Course
+                        <select name="course" id="profileCourse">
+                            <option value="">-- Select Your Course --</option>
+                            <optgroup label="Medical / Health">
+                                <option value="BSNS">BS Nursing</option>
+                                <option value="BSMLS">BS Medical Laboratory Science (MedTech)</option>
+                                <option value="BSPHARM">BS Pharmacy</option>
+                                <option value="BSPT">BS Physical Therapy</option>
+                                <option value="BSRT">BS Respiratory Therapy</option>
+                                <option value="BSRADTECH">BS Radiologic Technology</option>
+                                <option value="BSND">BS Nutrition and Dietetics</option>
+                            </optgroup>
+                            <optgroup label="Science &amp; Allied">
+                                <option value="BSBIO">BS Biology</option>
+                                <option value="BSPSY">BS Psychology</option>
+                            </optgroup>
+                            <optgroup label="Tech / IT">
+                                <option value="BSCS">BS Computer Science</option>
+                                <option value="BSIT">BS Information Technology</option>
+                                <option value="BSEEMC">BS Entertainment &amp; Multimedia Computing</option>
+                            </optgroup>
+                            <optgroup label="Business &amp; Management">
+                                <option value="BSACC">BS Accountancy</option>
+                                <option value="BSAIS">BS Accounting Information System</option>
+                                <option value="BSBA">BS Business Administration</option>
+                                <option value="BSBA-MKT">Marketing Management</option>
+                                <option value="BSBA-OPS">Operations &amp; Supply Chain</option>
+                                <option value="BSBA-BNF">Banking &amp; Finance</option>
+                            </optgroup>
+                            <optgroup label="Hospitality &amp; Tourism">
+                                <option value="BSIHM">BS International Hospitality Management</option>
+                                <option value="CA">Culinary Arts</option>
+                                <option value="CLO">Cruise Line / Hotel Operations</option>
+                                <option value="BSITM">BS International Tourism Management</option>
+                            </optgroup>
+                            <optgroup label="Public Safety / Law-related">
+                                <option value="BSCRIM">BS Criminology</option>
+                                <option value="BSFS">Bachelor of Forensic Science</option>
+                            </optgroup>
+                            <optgroup label="Maritime Courses">
+                                <option value="BSMT">BS Marine Transportation</option>
+                                <option value="BSME-MAR">BS Marine Engineering</option>
+                            </optgroup>
+                            <optgroup label="Education">
+                                <option value="BEED">Bachelor of Elementary Education</option>
+                                <option value="BSED-ENG">Bachelor of Secondary Education</option>
+                            </optgroup>
+                            <optgroup label="Professional Courses">
+                                <option value="MD">Doctor of Medicine</option>
+                                <option value="DMD">Doctor of Dental Medicine</option>
+                            </optgroup>
+                            <optgroup label="Senior High School (SHS)">
+                                <option value="SHS-ABM">ABM</option>
+                                <option value="SHS-STEM">STEM</option>
+                                <option value="SHS-HUMSS">HUMSS</option>
+                                <option value="SHS-GAS">GAS</option>
+                            </optgroup>
+                            <optgroup label="Short Courses / TESDA">
+                                <option value="CARE">Caregiving</option>
+                                <option value="CPNC2">Computer Programming NC II</option>
+                                <option value="CHSNC2">Computer Hardware Servicing NC II</option>
+                                <option value="HRS">Hotel &amp; Restaurant Services</option>
+                                <option value="ACS">Associate in Computer Science</option>
+                            </optgroup>
+                            <optgroup label="Graduate Programs">
+                                <option value="MBA">MBA / MPA</option>
+                                <option value="MA-MS">MA / MS (Education, Nursing, IT)</option>
+                                <option value="PHD">PhD &amp; Doctorate programs</option>
+                            </optgroup>
+                        </select>
+                    </label>
+                    <label>
+                        Bio
+                        <textarea name="bio" placeholder="Tell us about yourself" id="profileBio" style="resize: vertical; min-height: 80px;"></textarea>
+                    </label>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="primary-btn" style="flex: 1;">Save Changes</button>
+                        <button type="button" onclick="changePassword()" class="secondary-btn" style="flex: 1;">Change Password</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Admin Tasks Section -->
+            <div id="adminTasksSection" style="display: none; max-height: 600px; overflow-y: auto;">
+                <h3 style="color: #1a4232; margin-top: 0;">Website Statistics</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <!-- Total Visits Card -->
+                    <div style="background: linear-gradient(135deg, #1a4232 0%, #2d5f47 100%); color: white; padding: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(26, 66, 50, 0.15);">
+                        <div style="font-size: 0.8rem; opacity: 0.9;">Total Visits</div>
+                        <div style="font-size: 2rem; font-weight: 700;" id="adminTotalVisits">24,582</div>
+                    </div>
+
+                    <!-- Most Registered Course Card -->
+                    <div style="background: linear-gradient(135deg, #0056b3 0%, #0073e6 100%); color: white; padding: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 86, 179, 0.15);">
+                        <div style="font-size: 0.8rem; opacity: 0.9;">Most Registrations</div>
+                        <div style="font-size: 1.5rem; font-weight: 700;" id="adminTopCourseReg">BS Nursing</div>
+                        <div style="font-size: 0.75rem; opacity: 0.8;" id="adminTopCourseRegCount">2,340 registrations</div>
+                    </div>
+
+                    <!-- Top Course Users Card -->
+                    <div style="background: linear-gradient(135deg, #d2691e 0%, #ff8c00 100%); color: white; padding: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(210, 105, 30, 0.15);">
+                        <div style="font-size: 0.8rem; opacity: 0.9;">Top Active Course</div>
+                        <div style="font-size: 1.5rem; font-weight: 700;" id="adminTopActiveCourse">BS IT</div>
+                        <div style="font-size: 0.75rem; opacity: 0.8;" id="adminTopActiveCourseCount">3,182 visits</div>
+                    </div>
+                </div>
+
+                <h4 style="color: #1a4232; font-size: 0.95rem;">Top Courses</h4>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                        <thead>
+                            <tr style="background: #f4fbf7; border-bottom: 1px solid #dceddd;">
+                                <th style="padding: 0.7rem; text-align: left; color: #1a4232; font-weight: 700; font-size: 0.8rem;">Course</th>
+                                <th style="padding: 0.7rem; text-align: center; color: #1a4232; font-weight: 700; font-size: 0.8rem;">Regs</th>
+                                <th style="padding: 0.7rem; text-align: center; color: #1a4232; font-weight: 700; font-size: 0.8rem;">Visits</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminStatsTableBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </aside>
+
+        <script>
+            // Store current user session
+            let currentUser = null;
+
+            // Course statistics data
+            const courseStats = [
+                { course: 'BS Nursing', registrations: 2340, monthlyVisits: 2850, growth: '+12.5%' },
+                { course: 'BS IT', registrations: 1890, monthlyVisits: 3182, growth: '+18.3%' },
+                { course: 'BS Computer Science', registrations: 1745, monthlyVisits: 2965, growth: '+14.2%' },
+                { course: 'BS Business Administration', registrations: 1620, monthlyVisits: 2340, growth: '+8.7%' },
+                { course: 'BS Physical Therapy', registrations: 1385, monthlyVisits: 1950, growth: '+11.9%' }
+            ];
+
+            // Account drawer functionality
+            const profileTab = document.getElementById('profileTab');
+            const adminTasksTab = document.getElementById('adminTasksTab');
+            const profileSection = document.getElementById('profileSection');
+            const adminTasksSection = document.getElementById('adminTasksSection');
+            const accountDrawer = document.getElementById('accountDrawer');
+            const closeAccountDrawer = document.getElementById('closeAccountDrawer');
+            const accountBtn = document.getElementById('accountBtn');
+            const drawerBackdrop = document.getElementById('drawerBackdrop');
+            const openLogin = document.getElementById('openLogin');
+            const closeDrawer = document.getElementById('closeDrawer');
+            const rightDrawer = document.getElementById('rightDrawer');
+
+            // Open account drawer when "Your Account" is clicked
+            accountBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                accountDrawer.classList.add('open');
+                drawerBackdrop.classList.add('open');
+                rightDrawer.classList.remove('open');
+                profileTab.click();
+            });
+
+            // Open login drawer when "Login" is clicked
+            openLogin.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rightDrawer.classList.add('open');
+                drawerBackdrop.classList.add('open');
+                accountDrawer.classList.remove('open');
+            });
+
+            // Close account drawer
+            closeAccountDrawer.addEventListener('click', () => {
+                accountDrawer.classList.remove('open');
+                drawerBackdrop.classList.remove('open');
+            });
+
+            // Close login drawer
+            closeDrawer.addEventListener('click', () => {
+                rightDrawer.classList.remove('open');
+                drawerBackdrop.classList.remove('open');
+            });
+
+            drawerBackdrop.addEventListener('click', () => {
+                accountDrawer.classList.remove('open');
+                rightDrawer.classList.remove('open');
+                drawerBackdrop.classList.remove('open');
+            });
+
+            // Tab switching for account drawer
+            profileTab.addEventListener('click', () => {
+                profileTab.style.borderBottomColor = '#1a4232';
+                profileTab.style.color = '#1a4232';
+                adminTasksTab.style.borderBottomColor = 'transparent';
+                adminTasksTab.style.color = '#999';
+                profileSection.style.display = 'block';
+                adminTasksSection.style.display = 'none';
+            });
+
+            adminTasksTab.addEventListener('click', () => {
+                adminTasksTab.style.borderBottomColor = '#1a4232';
+                adminTasksTab.style.color = '#1a4232';
+                profileTab.style.borderBottomColor = 'transparent';
+                profileTab.style.color = '#999';
+                adminTasksSection.style.display = 'block';
+                profileSection.style.display = 'none';
+                renderAdminStats();
+            });
+
+            // Tab switching for login drawer
+            const loginTab = document.getElementById('loginTab');
+            const registerTab = document.getElementById('registerTab');
+            const loginSection = document.getElementById('loginSection');
+            const registerSection = document.getElementById('registerSection');
+            const drawerTitle = document.getElementById('drawerTitle');
+
+            loginTab.addEventListener('click', () => {
+                loginTab.style.borderBottomColor = '#1a4232';
+                loginTab.style.color = '#1a4232';
+                registerTab.style.borderBottomColor = 'transparent';
+                registerTab.style.color = '#999';
+                loginSection.style.display = 'block';
+                registerSection.style.display = 'none';
+                drawerTitle.textContent = 'Login';
+            });
+
+            registerTab.addEventListener('click', () => {
+                registerTab.style.borderBottomColor = '#1a4232';
+                registerTab.style.color = '#1a4232';
+                loginTab.style.borderBottomColor = 'transparent';
+                loginTab.style.color = '#999';
+                registerSection.style.display = 'block';
+                loginSection.style.display = 'none';
+                drawerTitle.textContent = 'Register';
+            });
+
+            // Edit profile form submission
+            document.getElementById('editProfileForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const fullname = document.getElementById('profileFullName').value;
+                const course = document.getElementById('profileCourse').value;
+                alert('Profile updated!\nName: ' + fullname + '\nCourse: ' + course);
+            });
+
+            function changePassword() {
+                const newPassword = prompt('Enter new password:');
+                if (newPassword) {
+                    alert('Password changed successfully!');
+                }
+            }
+
+            function renderAdminStats() {
+                const tableBody = document.getElementById('adminStatsTableBody');
+                const totalVisits = courseStats.reduce((sum, stat) => sum + stat.monthlyVisits, 0);
+                const topByReg = courseStats.reduce((max, stat) => stat.registrations > max.registrations ? stat : max);
+                const topByVisits = courseStats.reduce((max, stat) => stat.monthlyVisits > max.monthlyVisits ? stat : max);
+
+                document.getElementById('adminTotalVisits').textContent = totalVisits.toLocaleString();
+                document.getElementById('adminTopCourseReg').textContent = topByReg.course;
+                document.getElementById('adminTopCourseRegCount').textContent = topByReg.registrations.toLocaleString() + ' registrations';
+                document.getElementById('adminTopActiveCourse').textContent = topByVisits.course;
+                document.getElementById('adminTopActiveCourseCount').textContent = topByVisits.monthlyVisits.toLocaleString() + ' visits';
+
+                tableBody.innerHTML = '';
+                courseStats.forEach(stat => {
+                    const row = document.createElement('tr');
+                    row.style.borderBottom = '1px solid #dceddd';
+                    row.innerHTML = `
+                        <td style="padding: 0.7rem; color: #1a4232; font-size: 0.85rem;">${stat.course}</td>
+                        <td style="padding: 0.7rem; text-align: center; color: #4a5a72; font-size: 0.85rem;">${stat.registrations}</td>
+                        <td style="padding: 0.7rem; text-align: center; color: #4a5a72; font-size: 0.85rem;">${stat.monthlyVisits}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // Simulate user login and show/hide admin tab
+            function simulateLogin(role, email, fullname) {
+                currentUser = { role, email, fullname };
+                const adminTasksTab = document.getElementById('adminTasksTab');
+                if (adminTasksTab) {
+                    adminTasksTab.style.display = (role === 'admin' || role === 'super-admin') ? 'block' : 'none';
+                }
+                document.getElementById('profileEmail').value = email;
+                document.getElementById('profileFullName').value = fullname;
+                
+                // Update home section based on role
+                updateHomeSectionForRole(role);
+            }
+
+            // Update home section content based on user role
+            function updateHomeSectionForRole(role) {
+                const heroSection = document.getElementById('homeHeroSection');
+                const adminSection = document.getElementById('adminDashboardSection');
+                const superAdminSection = document.getElementById('superAdminDashboardSection');
+                const developersSection = document.querySelector('.developers');
+
+                if (role === 'super-admin') {
+                    heroSection.style.display = 'none';
+                    adminSection.style.display = 'none';
+                    if (superAdminSection) superAdminSection.style.display = 'block';
+                    if (developersSection) developersSection.style.display = 'none';
+                    renderSuperAdminDashboard();
+                } else if (role === 'admin') {
+                    heroSection.style.display = 'none';
+                    if (superAdminSection) superAdminSection.style.display = 'none';
+                    adminSection.style.display = 'block';
+                    if (developersSection) developersSection.style.display = 'none';
+                    renderDashboardStats();
+                } else {
+                    heroSection.style.display = 'block';
+                    if (superAdminSection) superAdminSection.style.display = 'none';
+                    adminSection.style.display = 'none';
+                    if (developersSection) developersSection.style.display = 'block';
+                }
+            }
+
+            // Render dashboard statistics
+            function renderDashboardStats() {
+                const tableBody = document.getElementById('dashboardStatsTableBody');
+                const totalVisits = courseStats.reduce((sum, stat) => sum + stat.monthlyVisits, 0);
+                const topByReg = courseStats.reduce((max, stat) => stat.registrations > max.registrations ? stat : max);
+                const topByVisits = courseStats.reduce((max, stat) => stat.monthlyVisits > max.monthlyVisits ? stat : max);
+                
+                // Get all courses for full table
+                const allCourses = [
+                    { course: 'BS Nursing', registrations: 2340, monthlyVisits: 2850, growth: '+12.5%' },
+                    { course: 'BS IT', registrations: 1890, monthlyVisits: 3182, growth: '+18.3%' },
+                    { course: 'BS Computer Science', registrations: 1745, monthlyVisits: 2965, growth: '+14.2%' },
+                    { course: 'BS Business Administration', registrations: 1620, monthlyVisits: 2340, growth: '+8.7%' },
+                    { course: 'BS Physical Therapy', registrations: 1385, monthlyVisits: 1950, growth: '+11.9%' },
+                    { course: 'BS Psychology', registrations: 1210, monthlyVisits: 1875, growth: '+9.3%' },
+                    { course: 'BS Accountancy', registrations: 1095, monthlyVisits: 1620, growth: '+6.4%' },
+                    { course: 'BS Marine Transportation', registrations: 945, monthlyVisits: 1420, growth: '+15.2%' },
+                    { course: 'BS International Hospitality', registrations: 872, monthlyVisits: 1305, growth: '+7.8%' },
+                    { course: 'Doctor of Medicine', registrations: 720, monthlyVisits: 1095, growth: '+22.1%' }
+                ];
+
+                document.getElementById('dashboardTotalVisits').textContent = totalVisits.toLocaleString();
+                document.getElementById('dashboardTopCourseReg').textContent = topByReg.course;
+                document.getElementById('dashboardTopCourseRegCount').textContent = topByReg.registrations.toLocaleString() + ' registrations';
+                document.getElementById('dashboardTopActiveCourse').textContent = topByVisits.course;
+                document.getElementById('dashboardTopActiveCourseCount').textContent = topByVisits.monthlyVisits.toLocaleString() + ' monthly visits';
+
+                tableBody.innerHTML = '';
+                allCourses.forEach(stat => {
+                    const row = document.createElement('tr');
+                    row.style.borderBottom = '1px solid #dceddd';
+                    row.style.transition = 'background-color 0.2s';
+                    row.onmouseover = () => row.style.backgroundColor = '#f9fdfb';
+                    row.onmouseout = () => row.style.backgroundColor = '';
+                    
+                    const growthColor = parseFloat(stat.growth) > 10 ? '#2e7d32' : '#ff9800';
+                    
+                    row.innerHTML = `
+                        <td style="padding: 1rem; color: #1a4232; font-weight: 600;">${stat.course}</td>
+                        <td style="padding: 1rem; text-align: center; color: #4a5a72;">${stat.registrations.toLocaleString()}</td>
+                        <td style="padding: 1rem; text-align: center; color: #4a5a72;">${stat.monthlyVisits.toLocaleString()}</td>
+                        <td style="padding: 1rem; text-align: center; color: ${growthColor}; font-weight: 600;">${stat.growth}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            const superAdminLogs = [
+                { timestamp: '2026-05-06 14:35:22', type: 'LOGIN', user: 'super@olfu.edu', action: 'Super Admin logged in', status: 'Success' },
+                { timestamp: '2026-05-06 14:30:15', type: 'ACCESS', user: 'admin@olfu.edu', action: 'Accessed user management', status: 'Success' },
+                { timestamp: '2026-05-06 14:25:08', type: 'UPDATE', user: 'admin@olfu.edu', action: 'Updated user permissions', status: 'Success' },
+                { timestamp: '2026-05-06 14:20:45', type: 'LOGIN', user: 'john.doe@olfu.edu', action: 'User logged in', status: 'Success' },
+                { timestamp: '2026-05-06 14:15:32', type: 'ERROR', user: 'jane.smith@olfu.edu', action: 'Failed login attempt', status: 'Failed' }
+            ];
+
+            const superFeedbackData = [
+                { date: '2026-05-06', user: 'mary.anne@olfu.edu', feedback: 'Please add a quick link to the campus map on the home page.', status: 'Open' },
+                { date: '2026-05-05', user: 'luis.gonzales@olfu.edu', feedback: 'Course list page should include a “newly opened” badge.', status: 'Important' },
+                { date: '2026-05-04', user: 'sarah.kim@olfu.edu', feedback: 'The login drawer button is hard to tap on mobile.', status: 'Resolved' }
+            ];
+
+            const superWebsiteContent = [
+                { id: 1, type: 'Announcement', title: 'New Campus Tours', details: 'Campus tours are now available every Saturday.' },
+                { id: 2, type: 'Course', title: 'BS Data Science', details: 'New course added for the upcoming academic year.' },
+                { id: 3, type: 'Building', title: 'Sunrise Hall', details: 'Added new building page location to the campus map.' }
+            ];
+
+            function renderSuperAdminDashboard() {
+                renderSuperAdminStats();
+                renderSuperAdminLogs();
+                renderSuperAdminFeedback();
+                populateSuperEditSelect();
+            }
+
+            function renderSuperAdminStats() {
+                const totalVisits = courseStats.reduce((sum, stat) => sum + stat.monthlyVisits, 0);
+                const topByReg = courseStats.reduce((max, stat) => stat.registrations > max.registrations ? stat : max);
+                const topByVisits = courseStats.reduce((max, stat) => stat.monthlyVisits > max.monthlyVisits ? stat : max);
+                document.getElementById('superTotalVisits').textContent = totalVisits.toLocaleString();
+                document.getElementById('superTopCourseReg').textContent = topByReg.course;
+                document.getElementById('superTopCourseRegCount').textContent = topByReg.registrations.toLocaleString() + ' registrations';
+                document.getElementById('superTopActiveCourse').textContent = topByVisits.course;
+                document.getElementById('superTopActiveCourseCount').textContent = topByVisits.monthlyVisits.toLocaleString() + ' monthly visits';
+            }
+
+            function renderSuperAdminLogs() {
+                const tableBody = document.getElementById('superLogsTableBody');
+                const noLogsElement = document.getElementById('superNoLogsMessage');
+                const filterText = document.getElementById('superLogFilter').value.toLowerCase();
+                const filterType = document.getElementById('superLogTypeFilter').value;
+                const filtered = superAdminLogs.filter(log => {
+                    const matchesText = log.action.toLowerCase().includes(filterText) || log.user.toLowerCase().includes(filterText);
+                    const matchesType = filterType === '' || log.type === filterType;
+                    return matchesText && matchesType;
+                });
+                tableBody.innerHTML = '';
+                if (filtered.length === 0) {
+                    noLogsElement.style.display = 'block';
+                } else {
+                    noLogsElement.style.display = 'none';
+                    filtered.forEach(log => {
+                        const row = document.createElement('tr');
+                        row.style.borderBottom = '1px solid #dceddd';
+                        row.style.transition = 'background-color 0.2s';
+                        row.onmouseover = () => row.style.backgroundColor = '#f9fdfb';
+                        row.onmouseout = () => row.style.backgroundColor = '';
+                        const statusColor = log.status === 'Success' ? '#2e7d32' : '#d32f2f';
+                        const typeColor = log.type === 'ERROR' ? '#d32f2f' : '#1a4232';
+                        row.innerHTML = `
+                            <td style="padding: 1rem; color: #4a5a72;">${log.timestamp}</td>
+                            <td style="padding: 1rem; color: ${typeColor}; font-weight: 600;">${log.type}</td>
+                            <td style="padding: 1rem; color: #4a5a72;">${log.user}</td>
+                            <td style="padding: 1rem; color: #4a5a72;">${log.action}</td>
+                            <td style="padding: 1rem; color: ${statusColor}; font-weight: 700;">${log.status}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                }
+            }
+
+            function clearSuperLogs() {
+                if (confirm('Clear all super admin logs?')) {
+                    superAdminLogs.length = 0;
+                    renderSuperAdminLogs();
+                }
+            }
+
+            function renderSuperAdminFeedback() {
+                const tableBody = document.getElementById('superFeedbackTableBody');
+                const filterText = document.getElementById('superFeedbackFilter').value.toLowerCase();
+                const filterStatus = document.getElementById('superFeedbackStatusFilter').value;
+                const filtered = superFeedbackData.filter(item => {
+                    const matchesText = item.feedback.toLowerCase().includes(filterText) || item.user.toLowerCase().includes(filterText);
+                    const matchesStatus = filterStatus === '' || item.status === filterStatus;
+                    return matchesText && matchesStatus;
+                });
+                tableBody.innerHTML = '';
+                filtered.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.style.borderBottom = '1px solid #dceddd';
+                    row.style.transition = 'background-color 0.2s';
+                    row.onmouseover = () => row.style.backgroundColor = '#f9fdfb';
+                    row.onmouseout = () => row.style.backgroundColor = '';
+                    const statusColor = item.status === 'Resolved' ? '#2e7d32' : item.status === 'Important' ? '#ff9800' : '#1a4232';
+                    row.innerHTML = `
+                        <td style="padding: 1rem; color: #4a5a72;">${item.date}</td>
+                        <td style="padding: 1rem; color: #4a5a72;">${item.user}</td>
+                        <td style="padding: 1rem; color: #4a5a72;">${item.feedback}</td>
+                        <td style="padding: 1rem; color: ${statusColor}; font-weight: 700;">${item.status}</td>
+                        <td style="padding: 1rem;">
+                            <button onclick="toggleSuperFeedbackStatus(${index})" style="padding: 0.55rem 0.9rem; background: #1a4232; color: white; border: none; border-radius: 8px; cursor: pointer;">${item.status === 'Resolved' ? 'Reopen' : 'Resolve'}</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            function toggleSuperFeedbackStatus(index) {
+                const item = superFeedbackData[index];
+                if (!item) return;
+                item.status = item.status === 'Resolved' ? 'Open' : 'Resolved';
+                renderSuperAdminFeedback();
+                addSuperManagementAction(`Feedback status updated for ${item.user}`);
+            }
+
+            function populateSuperEditSelect() {
+                const select = document.getElementById('superEditContentSelect');
+                if (!select) return;
+                select.innerHTML = superWebsiteContent.map(item => `<option value="${item.id}">${item.type}: ${item.title}</option>`).join('');
+                if (superWebsiteContent.length > 0) {
+                    showSuperEditContent(superWebsiteContent[0].id);
+                }
+            }
+
+            function showSuperEditContent(itemId) {
+                const item = superWebsiteContent.find(content => content.id === Number(itemId));
+                if (!item) return;
+                document.getElementById('superEditContentTitle').value = item.title;
+                document.getElementById('superEditContentDetails').value = item.details;
+            }
+
+            function addSuperContent() {
+                const type = document.getElementById('superContentType').value;
+                const title = document.getElementById('superContentTitle').value.trim();
+                const details = document.getElementById('superContentDetails').value.trim();
+                if (!title || !details) {
+                    alert('Please fill title and details before adding content.');
+                    return;
+                }
+                superWebsiteContent.push({ id: Date.now(), type, title, details });
+                document.getElementById('superContentTitle').value = '';
+                document.getElementById('superContentDetails').value = '';
+                populateSuperEditSelect();
+                addSuperManagementAction(`Added ${type}: ${title}`);
+            }
+
+            function editSuperContent() {
+                const selectedId = Number(document.getElementById('superEditContentSelect').value);
+                const title = document.getElementById('superEditContentTitle').value.trim();
+                const details = document.getElementById('superEditContentDetails').value.trim();
+                const item = superWebsiteContent.find(content => content.id === selectedId);
+                if (!item || !title || !details) {
+                    alert('Please select content and provide both title and details.');
+                    return;
+                }
+                item.title = title;
+                item.details = details;
+                populateSuperEditSelect();
+                document.getElementById('superEditContentSelect').value = selectedId;
+                addSuperManagementAction(`Updated ${item.type}: ${item.title}`);
+            }
+
+            function addSuperManagementAction(message) {
+                const list = document.getElementById('superManagementActionList');
+                if (!list) return;
+                const item = document.createElement('li');
+                item.style.marginBottom = '0.5rem';
+                item.textContent = `${new Date().toLocaleString()}: ${message}`;
+                list.prepend(item);
+            }
+
+            document.getElementById('superLogFilter').addEventListener('input', renderSuperAdminLogs);
+            document.getElementById('superLogTypeFilter').addEventListener('change', renderSuperAdminLogs);
+            document.getElementById('superFeedbackFilter').addEventListener('input', renderSuperAdminFeedback);
+            document.getElementById('superFeedbackStatusFilter').addEventListener('change', renderSuperAdminFeedback);
+
+            // Original login form submission
+            const loginForm = document.getElementById('loginForm');
+            const loginSubmitButton = document.querySelector('#loginForm button[type="submit"]');
+
+            const attachLoginSubmit = () => {
+                if (!loginForm) return;
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = e.target.email.value;
+                    
+                    // Determine role based on email
+                    let role = 'user';
+                    let fullname = 'User';
+                    
+                    if (email === 'super@olfu.edu') {
+                        role = 'super-admin';
+                        fullname = 'Super Admin';
+                    } else if (email === 'admin@olfu.edu') {
+                        role = 'admin';
+                        fullname = 'Admin';
+                    }
+                    
+                    simulateLogin(role, email, fullname);
+                    alert('Logged in as ' + role);
+                });
+            };
+
+            attachLoginSubmit();
+            if (loginSubmitButton) {
+                loginSubmitButton.addEventListener('click', () => {
+                    if (!loginForm) attachLoginSubmit();
+                });
+            }
+
+            // Original register form submission
+            document.getElementById('registerForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const fullname = e.target.fullname.value;
+                const email = e.target.email.value;
+                const password = e.target.password.value;
+                const confirmPassword = e.target.confirmPassword.value;
+
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                simulateLogin('user', email, fullname);
+                alert('Account created!');
+                e.target.reset();
+            });
+
+            // Sidebar menu functionality
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            const footerContact = document.getElementById('footerContact');
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const category = item.getAttribute('data-category');
+                    
+                    // Remove active class from all menu items
+                    menuItems.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked menu item
+                    item.classList.add('active');
+                    
+                    // Hide all content sections (but not menu items)
+                    const allSections = document.querySelectorAll('section[data-category], article[data-category]');
+                    allSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Hide contact block on About Us and Building pages
+                    if (footerContact) {
+                        footerContact.style.display = (category === 'snacks' || category === 'lunch') ? 'none' : 'block';
+                    }
+                    
+                    // Hide entire footer on Building pages
+                    const footer = document.querySelector('.footer');
+                    if (footer) {
+                        footer.style.display = (category === 'lunch') ? 'none' : 'block';
+                    }
+                    
+                    // Special handling for home section
+                    if (category === 'home') {
+                        const heroSection = document.getElementById('homeHeroSection');
+                        const adminSection = document.getElementById('adminDashboardSection');
+                        const superAdminSection = document.getElementById('superAdminDashboardSection');
+                        const developersSection = document.querySelector('.developers');
+                        
+                        if (currentUser && currentUser.role === 'super-admin') {
+                            heroSection.style.display = 'none';
+                            if (adminSection) adminSection.style.display = 'none';
+                            if (superAdminSection) superAdminSection.style.display = 'block';
+                            if (developersSection) developersSection.style.display = 'none';
+                            renderSuperAdminDashboard();
+                        } else if (currentUser && currentUser.role === 'admin') {
+                            heroSection.style.display = 'none';
+                            if (superAdminSection) superAdminSection.style.display = 'none';
+                            if (adminSection) adminSection.style.display = 'block';
+                            if (developersSection) developersSection.style.display = 'none';
+                            renderDashboardStats();
+                        } else {
+                            heroSection.style.display = 'block';
+                            if (adminSection) adminSection.style.display = 'none';
+                            if (superAdminSection) superAdminSection.style.display = 'none';
+                            if (developersSection) developersSection.style.display = 'block';
+                        }
+                    } else {
+                        // Show sections matching the category
+                        const categoryElements = document.querySelectorAll(`section[data-category="${category}"], article[data-category="${category}"]`);
+                        categoryElements.forEach(el => {
+                            el.style.display = 'block';
+                        });
+                    }
+                });
+            });
+
+            // Initialize - show home section by default
+            window.addEventListener('load', () => {
+                const homeButton = document.querySelector('[data-category="home"].menu-item');
+                if (homeButton) {
+                    homeButton.click();
+                }
+            });
+        </script>

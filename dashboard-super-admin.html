@@ -22,6 +22,339 @@
                 <li>Navigate quickly to campus points and building pages.</li>
             </ul>
         </section>
+
+        <!-- System Logs Section -->
+        <section style="margin-top: 2rem; background: #fff; border-radius: 16px; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.12); padding: 2rem;">
+            <h2 style="margin-top: 0; color: #1a4232;">System Logs</h2>
+            
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="text" id="logFilter" placeholder="Filter logs..." style="flex: 1; min-width: 200px; padding: 0.7rem; border: 1px solid #dceddd; border-radius: 8px; font-size: 0.95rem;">
+                <select id="logTypeFilter" style="padding: 0.7rem; border: 1px solid #dceddd; border-radius: 8px; font-size: 0.95rem;">
+                    <option value="">All Types</option>
+                    <option value="LOGIN">Login</option>
+                    <option value="ACCESS">Access</option>
+                    <option value="ERROR">Error</option>
+                    <option value="UPDATE">Update</option>
+                    <option value="DELETE">Delete</option>
+                </select>
+                <button onclick="clearLogs()" style="padding: 0.7rem 1.5rem; background: #d32f2f; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Clear Logs</button>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background: #f4fbf7; border-bottom: 2px solid #dceddd;">
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Timestamp</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Type</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">User</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Action</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logsTableBody">
+                        <!-- Logs will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="noLogsMessage" style="text-align: center; padding: 2rem; color: #4a5a72;">
+                No logs available.
+            </div>
+        </section>
+
+        <!-- Feedback Viewer Section -->
+        <section style="margin-top: 2rem; background: #fff; border-radius: 16px; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.12); padding: 2rem;">
+            <h2 style="margin-top: 0; color: #1a4232;">Feedback Viewer</h2>
+            <p style="color: #4a5a72;">Review user feedback and quickly mark requests as resolved or reply to a comment.</p>
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <input type="text" id="feedbackFilter" placeholder="Search feedback..." style="flex: 1; min-width: 200px; padding: 0.7rem; border: 1px solid #dceddd; border-radius: 8px; font-size: 0.95rem;">
+                <select id="feedbackStatusFilter" style="padding: 0.7rem; border: 1px solid #dceddd; border-radius: 8px; font-size: 0.95rem;">
+                    <option value="">All Status</option>
+                    <option value="Open">Open</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Important">Important</option>
+                </select>
+            </div>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background: #f4fbf7; border-bottom: 2px solid #dceddd;">
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Date</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">User</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Feedback</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Status</th>
+                            <th style="padding: 1rem; text-align: left; color: #1a4232; font-weight: 700;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feedbackTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Website Management Section -->
+        <section style="margin-top: 2rem; background: #fff; border-radius: 16px; box-shadow: 0 14px 32px rgba(15, 25, 42, 0.12); padding: 2rem;">
+            <h2 style="margin-top: 0; color: #1a4232;">Website Management</h2>
+            <p style="color: #4a5a72;">Add or edit website content, pages, and navigation without leaving the dashboard.</p>
+
+            <div style="display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-bottom: 1.5rem;">
+                <div style="padding: 1rem; background: #f4fbf7; border-radius: 14px; border: 1px solid #dceddd;">
+                    <h3 style="margin-top: 0; color: #1a4232;">Add New Website Item</h3>
+                    <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                        Content Type
+                        <select id="contentType" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 8px;">
+                            <option value="Announcement">Announcement</option>
+                            <option value="Course">Course</option>
+                            <option value="Building">Building</option>
+                            <option value="Page">Page</option>
+                            <option value="Navigation">Navigation Link</option>
+                        </select>
+                    </label>
+                    <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                        Title / Label
+                        <input id="contentTitle" type="text" placeholder="Enter title" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 8px;">
+                    </label>
+                    <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                        Details
+                        <textarea id="contentDetails" rows="4" placeholder="Enter details" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 8px;"></textarea>
+                    </label>
+                    <button onclick="addWebsiteContent()" style="width: 100%; padding: 0.85rem; background: #1a4232; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Add Content</button>
+                </div>
+
+                <div style="padding: 1rem; background: #f4fbf7; border-radius: 14px; border: 1px solid #dceddd;">
+                    <h3 style="margin-top: 0; color: #1a4232;">Edit Existing Content</h3>
+                    <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                        Choose Item
+                        <select id="editContentSelect" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 8px;"></select>
+                    </label>
+                    <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                        New Title
+                        <input id="editContentTitle" type="text" placeholder="Update title" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 8px;">
+                    </label>
+                    <label style="display: block; margin-bottom: 0.9rem; color: #4a5a72; font-size: 0.95rem;">
+                        New Details
+                        <textarea id="editContentDetails" rows="4" placeholder="Update details" style="width: 100%; margin-top: 0.4rem; padding: 0.75rem; border: 1px solid #dceddd; border-radius: 8px;"></textarea>
+                    </label>
+                    <button onclick="editWebsiteContent()" style="width: 100%; padding: 0.85rem; background: #1a4232; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer;">Save Changes</button>
+                </div>
+            </div>
+
+            <div style="background: #eef7f2; border-radius: 14px; border: 1px solid #dceddd; padding: 1rem;">
+                <h3 style="margin-top: 0; color: #1a4232;">Recent Management Actions</h3>
+                <ul id="managementActionList" style="margin: 0; padding-left: 1.25rem; color: #4a5a72;"></ul>
+            </div>
+        </section>
     </main>
+
+    <script>
+        // Sample system logs data
+        const systemLogs = [
+            { timestamp: '2026-05-06 14:35:22', type: 'LOGIN', user: 'super@olfu.edu', action: 'Super Admin logged in', status: 'Success' },
+            { timestamp: '2026-05-06 14:30:15', type: 'ACCESS', user: 'admin@olfu.edu', action: 'Accessed user management', status: 'Success' },
+            { timestamp: '2026-05-06 14:25:08', type: 'UPDATE', user: 'admin@olfu.edu', action: 'Updated user permissions', status: 'Success' },
+            { timestamp: '2026-05-06 14:20:45', type: 'LOGIN', user: 'john.doe@olfu.edu', action: 'User logged in', status: 'Success' },
+            { timestamp: '2026-05-06 14:15:32', type: 'ERROR', user: 'jane.smith@olfu.edu', action: 'Failed login attempt', status: 'Failed' },
+            { timestamp: '2026-05-06 14:10:18', type: 'DELETE', user: 'super@olfu.edu', action: 'Deleted inactive user account', status: 'Success' },
+            { timestamp: '2026-05-06 14:05:42', type: 'ACCESS', user: 'super@olfu.edu', action: 'Accessed system logs', status: 'Success' },
+            { timestamp: '2026-05-06 13:55:29', type: 'UPDATE', user: 'admin@olfu.edu', action: 'Updated building information', status: 'Success' },
+            { timestamp: '2026-05-06 13:45:16', type: 'LOGIN', user: 'super@olfu.edu', action: 'Super Admin logged in', status: 'Success' },
+            { timestamp: '2026-05-06 13:35:09', type: 'ACCESS', user: 'user@olfu.edu', action: 'Viewed navigation map', status: 'Success' }
+        ];
+
+        function renderLogs() {
+            const tableBody = document.getElementById('logsTableBody');
+            const noLogsMessage = document.getElementById('noLogsMessage');
+            const filterText = document.getElementById('logFilter').value.toLowerCase();
+            const filterType = document.getElementById('logTypeFilter').value;
+
+            const filteredLogs = systemLogs.filter(log => {
+                const matchesText = log.action.toLowerCase().includes(filterText) || 
+                                   log.user.toLowerCase().includes(filterText);
+                const matchesType = filterType === '' || log.type === filterType;
+                return matchesText && matchesType;
+            });
+
+            tableBody.innerHTML = '';
+
+            if (filteredLogs.length === 0) {
+                noLogsMessage.style.display = 'block';
+            } else {
+                noLogsMessage.style.display = 'none';
+                filteredLogs.forEach(log => {
+                    const row = document.createElement('tr');
+                    row.style.borderBottom = '1px solid #dceddd';
+                    row.style.transition = 'background-color 0.2s';
+                    row.onmouseover = () => row.style.backgroundColor = '#f9fdfb';
+                    row.onmouseout = () => row.style.backgroundColor = '';
+
+                    const statusColor = log.status === 'Success' ? '#2e7d32' : '#d32f2f';
+                    const typeColor = log.type === 'ERROR' ? '#d32f2f' : '#1a4232';
+
+                    row.innerHTML = `
+                        <td style="padding: 1rem; color: #4a5a72;">${log.timestamp}</td>
+                        <td style="padding: 1rem; color: ${typeColor}; font-weight: 600;">${log.type}</td>
+                        <td style="padding: 1rem; color: #4a5a72;">${log.user}</td>
+                        <td style="padding: 1rem; color: #4a5a72;">${log.action}</td>
+                        <td style="padding: 1rem; color: ${statusColor}; font-weight: 600;">${log.status}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        }
+
+        document.getElementById('logFilter').addEventListener('input', renderLogs);
+        document.getElementById('logTypeFilter').addEventListener('change', renderLogs);
+
+        function clearLogs() {
+            if (confirm('Are you sure you want to clear all logs? This action cannot be undone.')) {
+                systemLogs.length = 0;
+                renderLogs();
+                alert('All logs have been cleared.');
+            }
+        }
+
+        const feedbackData = [
+            { date: '2026-05-06', user: 'mary.anne@olfu.edu', feedback: 'Please add a quick link to the campus map on the home page.', status: 'Open' },
+            { date: '2026-05-05', user: 'luis.gonzales@olfu.edu', feedback: 'Course list page should include a “newly opened” badge.', status: 'Important' },
+            { date: '2026-05-04', user: 'sarah.kim@olfu.edu', feedback: 'The login drawer button is hard to tap on mobile.', status: 'Resolved' },
+            { date: '2026-05-03', user: 'jane.doe@olfu.edu', feedback: 'Add a feedback form for events and campus tours.', status: 'Open' },
+            { date: '2026-05-02', user: 'mark.ramos@olfu.edu', feedback: 'Search filters should remember my last choice.', status: 'Open' }
+        ];
+
+        const websiteContent = [
+            { id: 1, type: 'Announcement', title: 'New Campus Tours', details: 'Campus tours are now available every Saturday.' },
+            { id: 2, type: 'Course', title: 'BS Data Science', details: 'New course added for the upcoming academic year.' },
+            { id: 3, type: 'Building', title: 'Sunrise Hall', details: 'Added new building page location to the campus map.' }
+        ];
+
+        function renderFeedback() {
+            const tableBody = document.getElementById('feedbackTableBody');
+            const filterText = document.getElementById('feedbackFilter').value.toLowerCase();
+            const filterStatus = document.getElementById('feedbackStatusFilter').value;
+
+            const filteredFeedback = feedbackData.filter(item => {
+                const matchesText = item.feedback.toLowerCase().includes(filterText) || item.user.toLowerCase().includes(filterText);
+                const matchesStatus = filterStatus === '' || item.status === filterStatus;
+                return matchesText && matchesStatus;
+            });
+
+            tableBody.innerHTML = '';
+            filteredFeedback.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.style.borderBottom = '1px solid #dceddd';
+                row.style.transition = 'background-color 0.2s';
+                row.onmouseover = () => row.style.backgroundColor = '#f9fdfb';
+                row.onmouseout = () => row.style.backgroundColor = '';
+
+                const statusColor = item.status === 'Resolved' ? '#2e7d32' : item.status === 'Important' ? '#ff9800' : '#1a4232';
+
+                row.innerHTML = `
+                    <td style="padding: 1rem; color: #4a5a72;">${item.date}</td>
+                    <td style="padding: 1rem; color: #4a5a72;">${item.user}</td>
+                    <td style="padding: 1rem; color: #4a5a72;">${item.feedback}</td>
+                    <td style="padding: 1rem; color: ${statusColor}; font-weight: 700;">${item.status}</td>
+                    <td style="padding: 1rem;">
+                        <button onclick="toggleFeedbackStatus(${index})" style="padding: 0.45rem 0.8rem; background: #1a4232; color: #fff; border: none; border-radius: 8px; cursor: pointer;">${item.status === 'Resolved' ? 'Reopen' : 'Resolve'}</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function toggleFeedbackStatus(index) {
+            const item = feedbackData[index];
+            if (!item) return;
+            item.status = item.status === 'Resolved' ? 'Open' : 'Resolved';
+            renderFeedback();
+            logSystemAction('UPDATE', 'super@olfu.edu', `Feedback status changed for ${item.user}`);
+        }
+
+        function populateEditSelect() {
+            const select = document.getElementById('editContentSelect');
+            select.innerHTML = websiteContent.map(content => `<option value="${content.id}">${content.type}: ${content.title}</option>`).join('');
+            if (websiteContent.length > 0) {
+                const firstId = websiteContent[0].id;
+                showEditContent(firstId);
+            }
+        }
+
+        function showEditContent(itemId) {
+            const item = websiteContent.find(content => content.id === Number(itemId));
+            if (!item) return;
+            document.getElementById('editContentTitle').value = item.title;
+            document.getElementById('editContentDetails').value = item.details;
+        }
+
+        document.getElementById('editContentSelect').addEventListener('change', (e) => showEditContent(e.target.value));
+
+        function logSystemAction(type, user, action) {
+            systemLogs.unshift({
+                timestamp: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                type,
+                user,
+                action,
+                status: 'Success'
+            });
+            renderLogs();
+        }
+
+        function addWebsiteContent() {
+            const type = document.getElementById('contentType').value;
+            const title = document.getElementById('contentTitle').value.trim();
+            const details = document.getElementById('contentDetails').value.trim();
+
+            if (!title || !details) {
+                alert('Please provide both title and details before adding content.');
+                return;
+            }
+
+            websiteContent.push({ id: Date.now(), type, title, details });
+            document.getElementById('contentTitle').value = '';
+            document.getElementById('contentDetails').value = '';
+            populateEditSelect();
+            addManagementAction(`Added new ${type}: ${title}`);
+            logSystemAction('UPDATE', 'super@olfu.edu', `Added website content: ${type} - ${title}`);
+            alert('Content added successfully.');
+        }
+
+        function editWebsiteContent() {
+            const selectedId = Number(document.getElementById('editContentSelect').value);
+            const title = document.getElementById('editContentTitle').value.trim();
+            const details = document.getElementById('editContentDetails').value.trim();
+            const item = websiteContent.find(content => content.id === selectedId);
+
+            if (!item || !title || !details) {
+                alert('Please select an item and make sure title/details are not empty.');
+                return;
+            }
+
+            item.title = title;
+            item.details = details;
+            populateEditSelect();
+            document.getElementById('editContentSelect').value = selectedId;
+            addManagementAction(`Updated ${item.type}: ${item.title}`);
+            logSystemAction('UPDATE', 'super@olfu.edu', `Edited website content: ${item.type} - ${item.title}`);
+            alert('Content updated successfully.');
+        }
+
+        function addManagementAction(message) {
+            const list = document.getElementById('managementActionList');
+            const listItem = document.createElement('li');
+            listItem.style.marginBottom = '0.5rem';
+            listItem.textContent = `${new Date().toLocaleString()}: ${message}`;
+            list.prepend(listItem);
+        }
+
+        function initializeSuperAdmin() {
+            renderFeedback();
+            populateEditSelect();
+            renderLogs();
+        }
+
+        document.getElementById('feedbackFilter').addEventListener('input', renderFeedback);
+        document.getElementById('feedbackStatusFilter').addEventListener('change', renderFeedback);
+
+        // Initial render
+        initializeSuperAdmin();
+    </script>
 </body>
 </html>

@@ -407,17 +407,6 @@ body {
     gap: 0.6rem;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
-    color: #fff;
-    border-radius: 0.75rem;
-    padding: 0.75rem 0.5rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex;
-    align-items: bottom;
-    justify-content: bottom;
-    gap: 0.6rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
 }
 
 .drawer-btn:hover {
