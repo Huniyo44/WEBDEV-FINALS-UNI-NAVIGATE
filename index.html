@@ -1,0 +1,165 @@
+    <!DOCTYPE html>
+    <!-- saved from url=(0058)https://jgab-commits.github.io/WEBDEV111Midterm/Freshbite/ -->
+    <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Uni-Navigate</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="indexstyle.css">
+        <script defer src="indexscripit.js.download"></script>
+    </head>
+
+
+    <body>
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="brand">
+                    <img src="freshbite-logo.png" alt="Freshbite Logo" class="brand-icon">
+                    <span class="brand-text">UNI <br> NAVIGATE</span>
+                </div>
+                <nav class="menu">                <button class="menu-item active" data-category="home">
+                        <i class="icon fas fa-home"></i>
+                        <span class="label">Home</span>
+                    </button>
+
+                    <button class="menu-item" data-category="lunch">
+                        <i class="icon fas fa-building"></i>
+                        <span class="label">Building</span>
+                    </button>
+                    
+                
+                    <button class="menu-item active" data-category="snacks">
+                        <i class="icon fas fa-info-circle"></i>
+                        <span class="label">About us</span>
+                    </button>
+                </nav>
+                <div class="sidebar-actions">
+                    <button id="accountBtn" class="drawer-btn">
+                        <i class="icon fas fa-user"></i>
+                        <span class="label">Your Account</span>
+                    </button>
+                    <button id="openLogin" class="drawer-btn">
+                        <i class="icon fas fa-sign-in-alt"></i>
+                        <span class="label">Login</span>
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <header class="header">
+                    <h1>Welcome to OLFU Uni-Navigate</h1>
+                </header>
+                <section class="user-panel hidden" id="userPanel">
+                    <div class="user-panel-inner">
+                        <div>
+                            <p class="user-welcome">Welcome back, <strong id="userName">Guest</strong></p>
+                            <p class="user-role-text">Signed in as <span id="roleName">Visitor</span>.</p>
+                        </div>
+                        <div class="user-actions">
+                            <button id="logoutBtn" class="secondary-btn">Logout</button>
+                        </div>
+                    </div>
+                    <div id="roleActions" class="permission-cards"></div>
+                </section>
+                <section class="hero" data-category="home">
+                    <div class="hero-content">
+                        <img src="freshbite-logo.png" alt="UNI-NAVIGATE Logo" class="hero-logo">
+                        <h2>About Uni-Navigate</h2>
+                        <p>Uni-Navigate is a comprehensive wayfinding platform designed specifically for OLFU students. We understand that navigating a large university campus can be challenging, especially when you're trying to find your classrooms, discover the perfect spot to hangout, or locate a quiet area during breaks. Our mission is to make your campus experience smoother by providing clear directions, building layouts, and detailed information about all campus facilities. Whether you're a freshman or a returning student, Uni-Navigate is here to help you explore and master your campus with confidence.</p>
+                    </div>
+                </section>
+
+                <section class="about-section" data-category="snacks" style="display:none;">
+                    <div class="about-content">
+                        <h2>About Us</h2>
+                        <p>This website was developed by Labao and Lhance to make the campus easier and to help their fellow OLFU students. Uni-Navigate began as a student project to simplify campus navigation, helping users quickly find classrooms, hangout spots, and essential locations. Our goal is to make every day on campus less stressful and more efficient for students who want to move around with confidence.</p>
+                    </div>
+                </section>
+
+                <section class="cards" id="cardsContainer">
+                    <article class="meal-card" data-category="lunch" style="display: none;">
+                        <a href="st-benedict.html" class="meal-card-link">
+                            <img src="tamm.png" alt="Zucchini Meatball Bowl">
+                            <h2>Saint Benedict Hall</h2>
+                            <p>MXHM+J6G, Tamaraw Hills Ext, Valenzuela, Metro Manila</p>
+                            <div class="badge">VAL CAMP</div>
+                            <div class="card-details"></div>
+                        </a>
+                    </article>
+                    <article class="meal-card" data-category="lunch" style="display: none;">
+                        <a href="medicine-building.html" class="meal-card-link">
+                            <img src="main.jpg" alt="Grilled Chicken Power Plate">
+                            <h2>OLFU College of Medicine BLDG.</h2>
+                            <p>125 MacArthur Hwy, Valenzuela, Metro Manila</p>
+                            <div class="badge">VAL CAMP</div>
+                            <div class="card-details"></div>
+                        </a>
+                    </article>
+                    <article class="meal-card" data-category="lunch" style="display: none;">
+                        <a href="rise-tower.html" class="meal-card-link">
+                            <img src="Rise.webp" alt="Keto Chicken Bowl">
+                            <h2>RISE Tower</h2>
+                            <p>Fatima Ave, corner MacArthur Hwy, Valenzuela, 1440 Metro Manila</p>
+                            <div class="badge">VAL CAMP</div>
+                            <div class="card-details"></div>
+                        </a>
+                    </article>
+                
+                </section>
+
+                <section class="developers" data-category="home">
+                    <h2>Developers</h2>
+                    <div class="developers-grid">
+                        <div class="developer-card">
+                            <a href="https://www.facebook.com/lhance.suico.37" target="_blank">
+                                <img src="images2/lhance-suico.jpg" alt="Lhance Suico" class="developer-image">
+                            </a>
+                            <h3>Lhance Suico</h3>
+                        </div>
+                        <div class="developer-card">
+                            <a href="https://www.facebook.com/mo.ng.378537" target="_blank">
+                                <img src="images2/jun-labao.jpg" alt="Jun Labao" class="developer-image">
+                            </a>
+                            <h3>Jun Labao</h3>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="footer">
+                    <div class="footer-content">
+                        <h3>Contact Us</h3>
+                        <p><strong>Email:</strong> uni.navigate@olfu.edu</p>
+                        <p><strong>Phone:</strong> (02) 1234 5678</p>
+                        <p><strong>Location:</strong> Our Lady of Fatima University, Valenzuela, Metro Manila</p>
+                        <p class="footer-credit">&copy; 2026 Uni-Navigate. Created by Lhance Suico & Jun Labao</p>
+                    </div>
+                </footer>
+            </main>
+        </div>
+
+        <div class="drawer-backdrop" id="drawerBackdrop"></div>
+        <aside class="right-drawer" id="rightDrawer">
+            <div class="drawer-header">
+                <h2>Login</h2>
+                <button id="closeDrawer" class="close-btn" aria-label="Close login drawer">✕</button>
+            </div>
+            <p>Sign in to manage your meal plan.</p>
+            <p class="login-info">Demo accounts:
+                <br>Super Admin: super@olfu.edu / super123
+                <br>Admin: admin@olfu.edu / admin123
+                <br>User: user@olfu.edu / user123
+            </p>
+            <form class="login-form" id="loginForm">
+                <label>
+                    Email
+                    <input type="email" name="email" required="" placeholder="you@example.com">
+                </label>
+                <label>
+                    Password
+                    <input type="password" name="password" required="" placeholder="Enter password">
+                </label>
+                <button type="submit" class="primary-btn">Sign In</button>      
+            </form>
+        </aside>
+
+    </body></html>
