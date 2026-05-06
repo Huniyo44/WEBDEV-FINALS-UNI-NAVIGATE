@@ -8,20 +8,39 @@
                 button.classList.add('active');
                 const category = button.dataset.category;
                 const hero = document.querySelector('.hero');
+                const aboutSection = document.querySelector('.about-section');
                 const cardsContainer = document.querySelector('.cards');
                 const header = document.querySelector('.header');
+                const developers = document.querySelector('.developers');
+                const footer = document.querySelector('.footer');
                 const role = getUserRole();
                 if (category === 'home') {
-                    hero.style.display = 'grid';
+                    hero.style.display = 'block';
+                    aboutSection.style.display = 'none';
                     cardsContainer.style.display = 'none';
                     header.style.display = 'none';
+                    developers.style.display = 'block';
+                    footer.style.display = 'block';
                     if (role && userPanel) {
                         userPanel.classList.remove('hidden');
                     }
+                } else if (category === 'snacks') {
+                    hero.style.display = 'none';
+                    aboutSection.style.display = 'block';
+                    cardsContainer.style.display = 'none';
+                    header.style.display = 'block';
+                    developers.style.display = 'none';
+                    footer.style.display = 'none';
+                    if (userPanel) {
+                        userPanel.classList.add('hidden');
+                    }
                 } else {
                     hero.style.display = 'none';
-                    cardsContainer.style.display = 'grid';
+                    aboutSection.style.display = 'none';
+                    cardsContainer.style.display = 'flex';
                     header.style.display = 'block';
+                    developers.style.display = 'none';
+                    footer.style.display = 'none';
                     if (userPanel) {
                         userPanel.classList.add('hidden');
                     }
@@ -34,10 +53,16 @@
 
         // Initial state
         const initialActive = document.querySelector('.menu-item.active');
+        const aboutSection = document.querySelector('.about-section');
         if (initialActive && initialActive.dataset.category === 'home') {
-            document.querySelector('.hero').style.display = 'grid';
+            document.querySelector('.hero').style.display = 'block';
+            aboutSection.style.display = 'none';
             document.querySelector('.cards').style.display = 'none';
             document.querySelector('.header').style.display = 'none';
+            const developers = document.querySelector('.developers');
+            const footer = document.querySelector('.footer');
+            if (developers) developers.style.display = 'block';
+            if (footer) footer.style.display = 'block';
         }
 
         const openLoginBtn = document.getElementById('openLogin');
